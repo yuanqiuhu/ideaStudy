@@ -1,4 +1,4 @@
-package com.example.demo.VO;
+package com.xiaohu.zhixuan.VO;
 
 public class ResultVO {
     //错误码

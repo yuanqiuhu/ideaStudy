@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.xiaohu.zhixuan.controller;
 
-import com.example.demo.VO.ResultVO;
-import com.example.demo.service.impl.LoginServiceImpl;
+import com.xiaohu.zhixuan.VO.ResultVO;
+import com.xiaohu.zhixuan.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

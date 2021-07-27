@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.xiaohu.zhixuan.utils;
 
 public class Code {
     //成功

@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.xiaohu.zhixuan.service;
 
-import com.example.demo.VO.ResultVO;
+import com.xiaohu.zhixuan.VO.ResultVO;
 
 public interface LoginService {
 

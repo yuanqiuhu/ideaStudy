@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.xiaohu.zhixuan.entity;
 
 import javax.persistence.*;
 

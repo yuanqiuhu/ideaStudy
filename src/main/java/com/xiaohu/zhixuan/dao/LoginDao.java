@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.xiaohu.zhixuan.dao;
 
-import com.example.demo.entity.Login;
+import com.xiaohu.zhixuan.entity.Login;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

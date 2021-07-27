@@ -1,12 +1,11 @@
-package com.example.demo.service.impl;
+package com.xiaohu.zhixuan.service.impl;
 
-import com.example.demo.VO.LoginVO;
-import com.example.demo.VO.ResultVO;
-import com.example.demo.dao.LoginDao;
-import com.example.demo.entity.Login;
-import com.example.demo.service.LoginService;
-import com.example.demo.utils.Code;
-import org.apache.juli.logging.Log;
+import com.xiaohu.zhixuan.VO.LoginVO;
+import com.xiaohu.zhixuan.VO.ResultVO;
+import com.xiaohu.zhixuan.dao.LoginDao;
+import com.xiaohu.zhixuan.entity.Login;
+import com.xiaohu.zhixuan.service.LoginService;
+import com.xiaohu.zhixuan.utils.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

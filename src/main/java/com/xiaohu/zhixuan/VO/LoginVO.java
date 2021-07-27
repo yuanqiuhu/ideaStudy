@@ -1,4 +1,4 @@
-package com.example.demo.VO;
+package com.xiaohu.zhixuan.VO;
 
 public class LoginVO {
     //用户id
