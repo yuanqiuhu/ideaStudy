@@ -10,7 +10,6 @@ public class Login {
   @Id
   private Long loginId;
 
-
   private String account;
   private String password;
   private String token;

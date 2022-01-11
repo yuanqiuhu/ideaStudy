@@ -8,7 +8,7 @@ public class ResultVO {
     //备注
     private String message;
     //携带信息
-    private Object data;
+    private String data;
 
     public void setCode(int code) {
         this.code = code;
@@ -34,11 +34,11 @@ public class ResultVO {
         this.message = message;
     }
 
-    public Object getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class userController {
 
-    //这是测试能不能提交到github
-
-    //
     @Autowired
     LoginServiceImpl loginService;
 
@@ -21,7 +18,17 @@ public class userController {
     }
 
     @RequestMapping("/register")
-    public ResultVO register(String account,String password){
-        return loginService.register(account,password);
+    public ResultVO register(String account, String password, String userName, String userSex, String userAge, String userNickName){
+        return loginService.register(account,password,userName,userSex,userAge,userNickName);
+    }
+
+    @RequestMapping("/updatePassword")
+    public ResultVO updatePassword(String account,String password,String newPassword){
+        return loginService.changePassword(account,password,newPassword);
+    }
+
+    @RequestMapping("/takeBackPassword")
+    public ResultVO takeBackPassword(String account,String password){
+        return  loginService.takeBackPassword(account,password);
     }
 }
