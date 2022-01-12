@@ -40,6 +40,12 @@ public class Code {
     //消息为空
     public static int MESSAGE_IS_NULL;
 
+    //获取验证码错误
+    public static int GET_CODE_ERROR = 212;
+
+    //验证码不能为空
+    public static int CODE_IS_NULL = 213;
+
     public static String getError(int code){
         if (code == SUCCESS){
             return null;
@@ -69,7 +75,12 @@ public class Code {
             return "好友列表为空";
         }else if (code == MESSAGE_IS_NULL){
             return "消息为空";
-        }else {
+        }else if (code == GET_CODE_ERROR){
+            return "内测阶段只能使用特殊验证码";
+        }else if (code == CODE_IS_NULL){
+            return "验证码不能为空";
+        }
+        else {
             return null;
         }
     }

@@ -229,4 +229,50 @@ public class LoginServiceImpl implements LoginService{
         resultVO.setCode(Code.SUCCESS);
         return resultVO;
     }
+
+    @Override
+    public ResultVO getAndSureCode(int status,String account, String code) {  //status  0 获取验证码  1 验证验证码
+        ResultVO resultVO = new ResultVO();
+        if (status == 0){
+            //获取成功
+            resultVO.setCode(Code.SUCCESS);
+            resultVO.setData("0");
+            return resultVO;
+        }
+        if (status == 1){
+            resultVO.setData("1");
+            if (code == null){
+                //验证码不能为空
+                resultVO.setCode(Code.CODE_IS_NULL);
+                resultVO.setError(Code.getError(Code.CODE_IS_NULL));
+                return resultVO;
+            }
+            if (account == null){
+                //账号不能为空
+                resultVO.setCode(Code.REGISTER_ACCOUNT_ISNULL);
+                resultVO.setError(Code.getError(Code.REGISTER_ACCOUNT_ISNULL));
+                return resultVO;
+            }
+            if (code.equals("971101")){
+                Login login;
+                //根据账号查询账号信息
+                login = loginDao.findByAccount(account);
+
+                if (login == null){
+                    //用户不存在
+                    resultVO.setCode(Code.HAVE_NO_USER);
+                    resultVO.setError(Code.getError(Code.HAVE_NO_USER));
+                    return resultVO;
+                }
+                //验证成功
+                resultVO.setCode(Code.SUCCESS);
+                return resultVO;
+            }else {
+                resultVO.setCode(Code.GET_CODE_ERROR);
+                resultVO.setError(Code.getError(Code.GET_CODE_ERROR));
+                return resultVO;
+            }
+        }
+        return null;
+    }
 }

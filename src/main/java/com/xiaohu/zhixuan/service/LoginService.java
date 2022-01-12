@@ -12,4 +12,6 @@ public interface LoginService {
 
     ResultVO takeBackPassword(String account,String password);
 
+    ResultVO getAndSureCode(int status,String code,String account);
+
 }

@@ -31,4 +31,9 @@ public class userController {
     public ResultVO takeBackPassword(String account,String password){
         return  loginService.takeBackPassword(account,password);
     }
+
+    @RequestMapping("/getAndSureCode")
+    public ResultVO getAndSureCode(String status,String account,String code){
+        return  loginService.getAndSureCode(Integer.parseInt(status),account,code);
+    }
 }
