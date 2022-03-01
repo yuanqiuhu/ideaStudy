@@ -46,6 +46,15 @@ public class Code {
     //验证码不能为空
     public static int CODE_IS_NULL = 213;
 
+    //数据为空
+    public static int DATA_IS_NULL = 214;
+
+    //数据修改错误
+    public static int DATA_CHANGE_FAIL = 215;
+
+    //数据输入不正确
+    public static int DATA_INSERT_FAIL = 216;
+
     public static String getError(int code){
         if (code == SUCCESS){
             return null;
@@ -79,6 +88,12 @@ public class Code {
             return "内测阶段只能使用特殊验证码";
         }else if (code == CODE_IS_NULL){
             return "验证码不能为空";
+        }else if (code == DATA_IS_NULL){
+            return "数据为空";
+        }else if (code == DATA_CHANGE_FAIL){
+            return "数据修改错误";
+        }else if (code == DATA_INSERT_FAIL){
+            return "数据输入不正确";
         }
         else {
             return null;
