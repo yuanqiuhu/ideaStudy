@@ -11,9 +11,9 @@ public class User {
   @Id
   private long userId;
   private String userName;
-  private long userSex;
-  private long userBirth;
-  private String userNick;
+  private long userType;
+  private String userLevel;
+  private String userGroupId;
   private long createTime;
   private long updateTime;
   private long loginId;
@@ -27,7 +27,6 @@ public class User {
     this.userId = userId;
   }
 
-
   public String getUserName() {
     return userName;
   }
@@ -36,33 +35,29 @@ public class User {
     this.userName = userName;
   }
 
-
-  public long getUserSex() {
-    return userSex;
+  public long getUserType() {
+    return userType;
   }
 
-  public void setUserSex(long userSex) {
-    this.userSex = userSex;
+  public void setUserType(long userType) {
+    this.userType = userType;
   }
 
-
-  public long getUserBirth() {
-    return userBirth;
+  public String getUserLevel() {
+    return userLevel;
   }
 
-  public void setUserBirth(long userBirth) {
-    this.userBirth = userBirth;
+  public void setUserLevel(String userLevel) {
+    this.userLevel = userLevel;
   }
 
-
-  public String getUserNick() {
-    return userNick;
+  public String getUserGroupId() {
+    return userGroupId;
   }
 
-  public void setUserNick(String userNick) {
-    this.userNick = userNick;
+  public void setUserGroupId(String userGroupId) {
+    this.userGroupId = userGroupId;
   }
-
 
   public long getCreateTime() {
     return createTime;
@@ -72,7 +67,6 @@ public class User {
     this.createTime = createTime;
   }
 
-
   public long getUpdateTime() {
     return updateTime;
   }
@@ -81,7 +75,6 @@ public class User {
     this.updateTime = updateTime;
   }
 
-
   public long getLoginId() {
     return loginId;
   }
@@ -89,5 +82,4 @@ public class User {
   public void setLoginId(long loginId) {
     this.loginId = loginId;
   }
-
 }

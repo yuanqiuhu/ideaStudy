@@ -21,9 +21,14 @@ public class userController {
         return loginService.login(account,password);
     }
 
+    @RequestMapping("/loginByToken")
+    public ResultVO loginByToken(String account,String token){
+        return loginService.loginByToken(account,token);
+    }
+
     @RequestMapping("/register")
-    public ResultVO register(String account, String password, String userName, String userSex, String userAge, String userNickName){
-        return loginService.register(account,password,userName,userSex,userAge,userNickName);
+    public ResultVO register(String account, String password, String userName, String userType, String userLevel, String userGroupId){
+        return loginService.register(account,password,userName,userType,userLevel,userGroupId);
     }
 
     @RequestMapping("/updatePassword")

@@ -3,6 +3,7 @@ package com.xiaohu.zhixuan.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaohu.zhixuan.VO.LoginVO;
 import com.xiaohu.zhixuan.VO.ResultVO;
+import com.xiaohu.zhixuan.VO.UserVO;
 import com.xiaohu.zhixuan.dao.LoginDao;
 import com.xiaohu.zhixuan.dao.UserDao;
 import com.xiaohu.zhixuan.entity.Login;
@@ -59,11 +60,86 @@ public class LoginServiceImpl implements LoginService{
             return resultVO;
         }
         //密码正确
-        LoginVO loginVO = new LoginVO();
-        loginVO.setLoginId(login.getLoginId());
-        loginVO.setAccount(login.getAccount());
+        User user;
+        user = userDao.findByLoginId(login.getLoginId());
+        if (user == null){
+            //用户不存在
+            resultVO.setCode(Code.HAVE_NO_USER);
+            resultVO.setError(Code.getError(Code.HAVE_NO_USER));
+            return resultVO;
+        }
+        UserVO userVO = new UserVO();
+        userVO.setUserId(user.getUserId());
+        userVO.setUserName(user.getUserName());
+        userVO.setUserType(user.getUserType());
+        userVO.setUserLevel(user.getUserLevel());
+        userVO.setUserGroupId(user.getUserGroupId());
+        userVO.setLoginId(user.getLoginId());
+        userVO.setUserToken(login.getToken());
+        userVO.setUserAccount(login.getAccount());
         resultVO.setCode(Code.SUCCESS);
-        resultVO.setData(JSONObject.toJSONString(loginVO));
+        resultVO.setData(JSONObject.toJSONString(userVO));
+        return resultVO;
+    }
+
+    /**
+     * 登陆验证接口
+     * @param account  账号
+     * @param token 密码
+     * @return
+     */
+    @Override
+    public ResultVO loginByToken(String account, String token){
+        ResultVO resultVO = new ResultVO();
+        Login login;
+        if (account == null){
+            //账号错误
+            resultVO.setCode(Code.HAVE_NO_USER);
+            resultVO.setError(Code.getError(Code.HAVE_NO_USER));
+            return resultVO;
+        }else if (token == null){
+            //密码错误
+            resultVO.setCode(Code.PASSWORD_ERROR);
+            resultVO.setError(Code.getError(Code.PASSWORD_ERROR));
+            return resultVO;
+        }
+
+        //根据账号查询账号信息
+        login = loginDao.findByAccount(account);
+
+        if (login == null){
+            //用户不存在
+            resultVO.setCode(Code.HAVE_NO_USER);
+            resultVO.setError(Code.getError(Code.HAVE_NO_USER));
+            return resultVO;
+        }
+
+        if (!login.getToken().equals(token)){
+            //密码错误
+            resultVO.setCode(Code.PASSWORD_ERROR);
+            resultVO.setError(Code.getError(Code.PASSWORD_ERROR));
+            return resultVO;
+        }
+        //密码正确
+        User user;
+        user = userDao.findByLoginId(login.getLoginId());
+        if (user == null){
+            //用户不存在
+            resultVO.setCode(Code.HAVE_NO_USER);
+            resultVO.setError(Code.getError(Code.HAVE_NO_USER));
+            return resultVO;
+        }
+        UserVO userVO = new UserVO();
+        userVO.setUserId(user.getUserId());
+        userVO.setUserName(user.getUserName());
+        userVO.setUserType(user.getUserType());
+        userVO.setUserLevel(user.getUserLevel());
+        userVO.setUserGroupId(user.getUserGroupId());
+        userVO.setLoginId(user.getLoginId());
+        userVO.setUserToken(login.getToken());
+        userVO.setUserAccount(login.getAccount());
+        resultVO.setCode(Code.SUCCESS);
+        resultVO.setData(JSONObject.toJSONString(userVO));
         return resultVO;
     }
 
@@ -74,7 +150,7 @@ public class LoginServiceImpl implements LoginService{
      * @return
      */
     @Override
-    public ResultVO register(String account, String password, String userName, String userSex, String userAge, String userNickName) {
+    public ResultVO register(String account, String password, String userName, String userType, String userLevel, String userGroupId) {
         ResultVO resultVO = new ResultVO();
         if (account == null){
             //账号不能为空
@@ -120,9 +196,9 @@ public class LoginServiceImpl implements LoginService{
         User user = new User();
         user.setLoginId(backLogin.getLoginId());
         user.setUserName(userName);
-        user.setUserSex(Integer.valueOf(userSex));
-        user.setUserBirth(Integer.valueOf(userAge));
-        user.setUserNick(userNickName);
+        user.setUserType(Integer.valueOf(userType));
+        user.setUserLevel(userType);
+        user.setUserGroupId(userGroupId);
 
         user.setCreateTime(time);
         user.setUpdateTime(time);

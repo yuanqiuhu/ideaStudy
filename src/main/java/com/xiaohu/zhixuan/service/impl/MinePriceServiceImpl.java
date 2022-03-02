@@ -41,7 +41,7 @@ public class MinePriceServiceImpl implements MinePriceService {
             return resultVO;
         }
         resultVO.setCode(Code.SUCCESS);
-        resultVO.setData(minePrices.toString());
+        resultVO.setData(JSONObject.toJSONString(minePrices));
         return resultVO;
     }
 
