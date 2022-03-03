@@ -1,14 +1,19 @@
 package com.xiaohu.zhixuan.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaohu.zhixuan.VO.MinePriceVO;
+import com.xiaohu.zhixuan.VO.MineTypeVO;
 import com.xiaohu.zhixuan.VO.ResultVO;
 import com.xiaohu.zhixuan.dao.MinePriceDao;
+import com.xiaohu.zhixuan.dao.MineTypeDao;
 import com.xiaohu.zhixuan.entity.MinePrice;
+import com.xiaohu.zhixuan.entity.MineType;
 import com.xiaohu.zhixuan.service.MinePriceService;
 import com.xiaohu.zhixuan.utils.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +21,8 @@ public class MinePriceServiceImpl implements MinePriceService {
 
     @Autowired
     MinePriceDao minePriceDao;
+    @Autowired
+    MineTypeDao mineTypeDao;
 
     @Override
     public ResultVO findAllMine() {
@@ -28,6 +35,31 @@ public class MinePriceServiceImpl implements MinePriceService {
         }
         resultVO.setCode(Code.SUCCESS);
         resultVO.setData(minePrices.toString());
+        return resultVO;
+    }
+
+    @Override
+    public ResultVO findAllByMineNameIsNotNull() {
+        ResultVO resultVO = new ResultVO();
+        List<MinePrice> minePrices = minePriceDao.findAllByMineNameIsNotNull();
+        if (minePrices.size() <= 0){
+            resultVO.setCode(Code.DATA_IS_NULL);
+            resultVO.setMessage(Code.getError(Code.DATA_IS_NULL));
+            return resultVO;
+        }
+
+        MinePriceVO minePriceVO;
+        List<MinePriceVO> minePriceVOS = new ArrayList<>();
+        for (MinePrice minePrice : minePrices){
+            minePriceVO = new MinePriceVO();
+            minePriceVO.setMineId(minePrice.getMineId());
+            minePriceVO.setMinePrice(minePrice.getMinePrice());
+            minePriceVO.setMineName(minePrice.getMineName());
+            minePriceVO.setMineType(minePrice.getMineType());
+            minePriceVOS.add(minePriceVO);
+        }
+        resultVO.setCode(Code.SUCCESS);
+        resultVO.setData(JSONObject.toJSONString(minePriceVOS));
         return resultVO;
     }
 
@@ -118,6 +150,31 @@ public class MinePriceServiceImpl implements MinePriceService {
 
         //添加成功
         resultVO.setCode(Code.SUCCESS);
+        return resultVO;
+    }
+
+    @Override
+    public ResultVO getMineType() {
+        ResultVO resultVO = new ResultVO();
+
+        List<MineType> mineTypes = mineTypeDao.findAllByMineTypeNameIsNotNull();
+
+        if (mineTypes.size() <= 0){
+            resultVO.setCode(Code.DATA_IS_NULL);
+            resultVO.setError(Code.getError(Code.CODE_IS_NULL));
+            return resultVO;
+        }
+
+        List<MineTypeVO> mineTypeVOS = new ArrayList<>();
+        MineTypeVO mineTypeVO;
+        for (MineType mineType : mineTypes){
+            mineTypeVO = new MineTypeVO();
+            mineTypeVO.setMineTypeId(mineType.getMineTypeId());
+            mineTypeVO.setMineTypeName(mineType.getMineTypeName());
+            mineTypeVOS.add(mineTypeVO);
+        }
+        resultVO.setCode(Code.SUCCESS);
+        resultVO.setData(JSONObject.toJSONString(mineTypeVOS));
         return resultVO;
     }
 }

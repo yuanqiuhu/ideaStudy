@@ -55,6 +55,9 @@ public class Code {
     //数据输入不正确
     public static int DATA_INSERT_FAIL = 216;
 
+    //军团不存在
+    public static int GROUP_IS_NULL = 217;
+
     public static String getError(int code){
         if (code == SUCCESS){
             return null;
@@ -94,6 +97,8 @@ public class Code {
             return "数据修改错误";
         }else if (code == DATA_INSERT_FAIL){
             return "数据输入不正确";
+        }else if (code == GROUP_IS_NULL){
+            return "军团不存在";
         }
         else {
             return null;

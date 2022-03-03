@@ -1,7 +1,8 @@
 package com.xiaohu.zhixuan.controller;
 
 import com.xiaohu.zhixuan.VO.ResultVO;
-import com.xiaohu.zhixuan.service.MinePriceService;
+import com.xiaohu.zhixuan.service.impl.GpStoreHouseServiceImpl;
+import com.xiaohu.zhixuan.service.impl.GroupServiceImpl;
 import com.xiaohu.zhixuan.service.impl.LoginServiceImpl;
 import com.xiaohu.zhixuan.service.impl.MinePriceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class userController {
     LoginServiceImpl loginService;
     @Autowired
     MinePriceServiceImpl minePriceService;
+    @Autowired
+    GroupServiceImpl groupService;
+    @Autowired
+    GpStoreHouseServiceImpl gpStoreHouseService;
 
     @RequestMapping("/login")
     public ResultVO login(String account,String password){
@@ -48,7 +53,7 @@ public class userController {
 
     @RequestMapping("/getAllMine")
     public ResultVO getAllMine(){
-        return minePriceService.findAllMine();
+        return minePriceService.findAllByMineNameIsNotNull();
     }
 
     @RequestMapping("/getMineByType")
@@ -71,4 +76,28 @@ public class userController {
         return minePriceService.updateMinePrice(price,mineId);
     }
 
+    @RequestMapping("/getGroupById")
+    public ResultVO getGroupById(long groupId){
+        return groupService.findByGroupId(groupId);
+    }
+
+    @RequestMapping("/getGpHouseByGpId")
+    public ResultVO getGpHouseByGpId(long gpId){
+        return gpStoreHouseService.findAllByGpId(gpId);
+    }
+
+    @RequestMapping("/getGpHouseByGpIdAndMineId")
+    public ResultVO getGpHouseByGpIdAndMineId(long gpId,long mineId){
+        return gpStoreHouseService.findByGpIdAndMineId(gpId,mineId);
+    }
+
+    @RequestMapping("/getMineType")
+    public ResultVO getMineType(){
+        return minePriceService.getMineType();
+    }
+
+    @RequestMapping("/getGpHouseByGpIdAndMineType")
+    public ResultVO getGpHouseByGpIdAndMineType(long gpId,int mineType){
+        return gpStoreHouseService.findByGpIdAndMineType(gpId,mineType);
+    }
 }

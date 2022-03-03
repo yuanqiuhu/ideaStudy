@@ -6,6 +6,8 @@ public interface MinePriceService {
 
     ResultVO findAllMine();
 
+    ResultVO findAllByMineNameIsNotNull();
+
     ResultVO findByMineType(int type);
 
     ResultVO findByMineId(long id);
@@ -15,4 +17,6 @@ public interface MinePriceService {
     ResultVO updateMinePrice(float price,long mineId);
 
     ResultVO insertNewMine(String name,float price,int type);
+
+    ResultVO getMineType();
 }

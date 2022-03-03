@@ -14,11 +14,15 @@ public interface MinePriceDao extends JpaRepository<MinePrice,Integer> {
 
     List<MinePrice> findAll();
 
+    List<MinePrice> findAllByMineNameIsNotNull();
+
     List<MinePrice> findAllByMineType(int type);
 
     MinePrice findByMineName(String name);
 
     MinePrice findByMineId(long id);
+
+
 
     @Transactional
     @Modifying
